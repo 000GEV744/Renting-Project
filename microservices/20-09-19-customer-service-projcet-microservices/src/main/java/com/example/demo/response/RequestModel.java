@@ -8,26 +8,41 @@ public class RequestModel {
 	private String email;
 	private String password;
 	private String phoneNumber;
+	private String matchingPassword;
 	private String address;
     private String city;
 	private String state;
 	private int postalCode;
 	private String country;
 	
+	
+	
 	public RequestModel(String firstname, String lastName, String email, String password, String phoneNumber,
-			String address, String city, String state, int postalCode, String country) {
+			String matchingPassword, String address, String city, String state, int postalCode, String country) {
 		super();
 		this.firstname = firstname;
 		this.lastName = lastName;
 		this.email = email;
 		this.password = password;
 		this.phoneNumber = phoneNumber;
+		this.matchingPassword = matchingPassword;
 		this.address = address;
 		this.city = city;
 		this.state = state;
 		this.postalCode = postalCode;
 		this.country = country;
 	}
+
+
+	public String getMatchingPassword() {
+		return matchingPassword;
+	}
+
+
+	public void setMatchingPassword(String matchingPassword) {
+		this.matchingPassword = matchingPassword;
+	}
+
 
 	public String getFirstname() {
 		return firstname;

@@ -34,14 +34,18 @@ public class UserController {
 	
 	
 	@PostMapping("/register")
-	public ResponseEntity<ResponseModel> createUser(@RequestBody RequestModel request){
+	public ResponseEntity<?> createUser(@RequestBody RequestModel request){
 		
 		mapper.getConfiguration().setMatchingStrategy(MatchingStrategies.STRICT);
 		UserDto userDetails=mapper.map(request, UserDto.class);
 		UserDto dto=userServ.createUser(userDetails);
+		if(dto==null) {
+			return ResponseEntity.badRequest().body("couldn't registered..!");
+		}
 		ResponseModel response = mapper.map(dto, ResponseModel.class);
 		return ResponseEntity.ok(response);
 	}
+	
 	
 	
 	@PostMapping("/login")
@@ -55,6 +59,13 @@ public class UserController {
 			return ResponseEntity.ok(response);
 		}
 		else return ResponseEntity.badRequest().body("Wrong Credentials");
+	}
+	
+	@GetMapping("/delete/{userId}")
+	public ResponseEntity<?> deleteUser(@PathVariable String userId){
+		userServ.deleteUser(userId);
+		return ResponseEntity.ok("user deleted");
+		
 	}
 	
 	

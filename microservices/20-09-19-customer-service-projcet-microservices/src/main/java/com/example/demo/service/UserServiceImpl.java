@@ -21,6 +21,13 @@ public class UserServiceImpl implements UserService{
 	private BCryptPasswordEncoder bCryptPasswordEncoder;
 	
 	
+	
+	@Override
+	public void deleteUser(String userId) {
+		userRepo.deleteByUserId(userId);
+	}
+	
+	
 	@Override
 	public UserDto findUserByUserId(String userId) {
 		Optional<User> result=userRepo.findByUserId(userId);
@@ -37,20 +44,31 @@ public class UserServiceImpl implements UserService{
 	
 	
 	
-	@Override
-	public UserDto createUser(UserDto userDetails) {
-		ModelMapper mapper = new ModelMapper();
-		mapper.getConfiguration().setMatchingStrategy(MatchingStrategies.STRICT);
-		userDetails.setUserId(UserServiceImpl.generateRandomString());
-		User user = mapper.map(userDetails, User.class);
-		//becryptpassword
+	//registering the user
+		@Override
+		public UserDto createUser(UserDto userDetails) {
+			ModelMapper mapper = new ModelMapper();
+			mapper.getConfiguration().setMatchingStrategy(MatchingStrategies.STRICT);
+			
+			if(userDetails.getPassword().equals(userDetails.getMatchingPassword())) {
+				System.out.println("user's password matched");
+				String email= userDetails.getEmail();
+				User userAlreadyExists = userRepo.findByEmail(email);
+				if(userAlreadyExists==null) {
+			userDetails.setUserId(UserServiceImpl.generateRandomString());
+			User user = mapper.map(userDetails, User.class);
+			//becryptpassword
+			String bpass=bCryptPasswordEncoder.encode(user.getPassword());
+			user.setPassword(bpass);
+			UserDto userDto = mapper.map(user, UserDto.class);
+			userRepo.save(user);
+			return userDto;
+				}
+		   }
+			System.out.println("user already exist.!");
+			return null;
+		}
 		
-		String bpass=bCryptPasswordEncoder.encode(user.getPassword());
-		user.setPassword(bpass);
-		UserDto userDto = mapper.map(user, UserDto.class);
-		userRepo.save(user);
-		return userDto;
-	}
 	
 	
 	

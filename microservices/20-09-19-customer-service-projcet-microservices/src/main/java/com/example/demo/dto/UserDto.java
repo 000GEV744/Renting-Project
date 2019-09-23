@@ -1,14 +1,15 @@
 package com.example.demo.dto;
 
 
-
 public class UserDto {
 	
 	private String userId;
 	private String firstname;
 	private String lastName;
 	private String email;
+	
 	private String password;
+	private String matchingPassword;
 	private String phoneNumber;
 	private String address;
     private String city;
@@ -18,13 +19,15 @@ public class UserDto {
 	public UserDto() {
 		super();
 	}
-	public UserDto(String firstname, String lastName, String email, String password, String phoneNumber, String address,
-			String city, String state, int postalCode, String country) {
+	
+	public UserDto(String firstname, String lastName, String email, String password, String matchingPassword,
+			String phoneNumber, String address, String city, String state, int postalCode, String country) {
 		super();
 		this.firstname = firstname;
 		this.lastName = lastName;
 		this.email = email;
 		this.password = password;
+		this.matchingPassword = matchingPassword;
 		this.phoneNumber = phoneNumber;
 		this.address = address;
 		this.city = city;
@@ -32,6 +35,16 @@ public class UserDto {
 		this.postalCode = postalCode;
 		this.country = country;
 	}
+
+	
+	public String getMatchingPassword() {
+		return matchingPassword;
+	}
+
+	public void setMatchingPassword(String matchingPassword) {
+		this.matchingPassword = matchingPassword;
+	}
+
 	public String getUserId() {
 		return userId;
 	}

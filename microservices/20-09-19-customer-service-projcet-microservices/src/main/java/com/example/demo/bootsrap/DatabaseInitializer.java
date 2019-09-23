@@ -24,7 +24,7 @@ public class DatabaseInitializer implements ApplicationListener<ContextRefreshed
 	}
 
 	private void init() {
-		User anuj  = new User("Anuj", "Singh", "anuj6@gg.com", "anuj@123", "958930452", "bjrang nagar", "Bhopak", "karnatakja", 486001, "India");
+		User anuj  = new User("Anuj", "Singh", "anuj60360@gmail.com", "anuj@123", "anuj@123", "8989720724", "Bajrang Nagar", "City", "MP", 487003, "India");
 		anuj.setUserId(UserServiceImpl.generateRandomString());
 		String bpass=bCryptPasswordEncoder.encode(anuj.getPassword());
 	    anuj.setPassword(bpass);
