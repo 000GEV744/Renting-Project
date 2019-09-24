@@ -27,9 +27,6 @@ public class User {
 	
 	@Column(nullable = false)
 	private String password;
-	
-	@Column(nullable = false)
-	private String matchingPassword;
 
 	private String phoneNumber;
 	
@@ -52,14 +49,14 @@ public class User {
 	
 
 	public User( String firstname, String lastName, String email, String password,
-			String matchingPassword, String phoneNumber, String address, String city, String state, int postalCode,
+			 String phoneNumber, String address, String city, String state, int postalCode,
 			String country) {
 		super();
 		this.firstname = firstname;
 		this.lastName = lastName;
 		this.email = email;
 		this.password = password;
-		this.matchingPassword = matchingPassword;
+
 		this.phoneNumber = phoneNumber;
 		this.address = address;
 		this.city = city;
@@ -69,14 +66,7 @@ public class User {
 	}
 
 	
-	public String getMatchingPassword() {
-		return matchingPassword;
-	}
-
-
-	public void setMatchingPassword(String matchingPassword) {
-		this.matchingPassword = matchingPassword;
-	}
+	
 
 
 	public User() {
