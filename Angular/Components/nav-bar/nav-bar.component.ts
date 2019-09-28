@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import * as CryptoJS from 'crypto-js';
 
 @Component({
   selector: 'app-nav-bar',
@@ -7,9 +8,34 @@ import { Component, OnInit } from '@angular/core';
 })
 export class NavBarComponent implements OnInit {
 
-  constructor() { }
+  username:string;
+  userid:string;
+  key:'123456$#@$^@1ERF';
+  _url:any;
 
-  ngOnInit() {
+  constructor() {
+    
   }
+   
+
+  ngOnInit(){
+    
+    this.loggedInUser();
+  }
+
+  loggedInUser(){
+    this.userid =localStorage.getItem('token');
+    if(this.userid!=undefined){ 
+    this._url = 'http://172.18.2.253:3000/findcustomer?cid='+this.userid;
+    fetch(this._url)
+    .then(res=>res.json())
+    .then(data=>{
+      this.username=data[0].customername;      
+    })
+  }
+  else{
+   this.username='noLoggedInUser'
+  }
+}
 
 }
